@@ -20,6 +20,10 @@ jobs:
         run: |
           pip install -r requirements.txt   
           python train_model.py
+          python testing.py
+
+          echo " Sanity Checks" > report2.md
+          cat test.txt >> report2.md
 
           echo "RF and LR Model Score" > report.md
           cat scores.txt >> report.md   
@@ -28,5 +32,5 @@ jobs:
           echo '![](./ConfusionMatrix.png "ConfusionMatrix")' >> report1.md
           echo '![](./FeatureImportance.png "FeatureImportance")' >> report1.md
 
-          cat report.md report1.md > combined_file.md
+          cat report2.md report.md report1.md > combined_file.md
           cml comment create combined_file.md
